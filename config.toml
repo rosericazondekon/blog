@@ -5,7 +5,7 @@ languageCode = "en"
 defaultContentLanguage = "en"
 enableEmoji = true
 enableRobotsTXT = true
-googleAnalytics = G-3TBYJJHRP3
+googleAnalytics = "G-3TBYJJHRP3"
 
 # Choose one of emacs, trac or perldoc
 pygmentsStyle = "monokai"
