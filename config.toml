@@ -13,7 +13,7 @@ pygmentsStyle = "monokai"
 [params]
   footer = "Roseric Azondekon"
   description = "Public Health Informatics Specialist, Epidemiologist & Medical Entomologist"
-  avatarURL = "https://rosericazondekon.github.io/blog/images/roz.webp"
+  avatarURL = "/images/roz.webp"
   avatarSize = "size-m"
   customHeadHTML = """
     <!-- KaTeX -->
