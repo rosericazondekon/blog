@@ -17,7 +17,6 @@ blog.Rproj
 
 # public folder
 public/
-docs/
 
 # Output files from R CMD build
 /*.tar.gz
