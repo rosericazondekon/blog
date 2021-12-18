@@ -62,7 +62,7 @@ pygmentsStyle = "monokai"
   [[menu.main]]
     identifier = "github"
     pre = "<span data-feather='github'></span>"
-    url = "https://github.com/rosericazondekon/rozblog"
+    url = "https://github.com/rosericazondekon"
     weight = 6
 
   [[menu.main]]
