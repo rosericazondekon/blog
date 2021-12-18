@@ -38,7 +38,7 @@ jobs:
         with:
           source-files: 'public/*'
           destination-username: 'rosericazondekon'
-          destination-repository: 'rozblog'
+          destination-repository: 'blog'
           destination-directory: 'docs'
           commit-email: 'roseric_2000@yahoo.fr'
           
