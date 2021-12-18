@@ -2,6 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TBYJJHRP3"></script>
+
     <style>
         :root {
             --accent-color: {{ .Site.Params.AccentColor | default "#FF4D4D" }};
@@ -36,13 +37,13 @@
     <!-- SEO canonicals: helps Google understand your site better when using marketing campaign tagging etc -->
     <link rel="canonical" href="{{ .Permalink }}" />
 
-    <link rel="stylesheet" type="text/css" href="https://rosericazondekon.github.io/blog/css/normalize.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" type="text/css" href="https://rosericazondekon.github.io/blog/css/main.css">
-    <link disabled id="dark-theme" rel="stylesheet" href="https://rosericazondekon.github.io/blog/css/dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
 
-    <script src="https://rosericazondekon.github.io/blog/js/svg-injector.min.js"></script>
-    <script src="https://rosericazondekon.github.io/blog/js/feather-icons.min.js"></script>
-    <script src="https://rosericazondekon.github.io/blog/js/main.js"></script>
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
 
     <!-- Option for user to inject custom html -->
     {{ if .Site.Params.CustomHeadHTML }}
