@@ -1,5 +1,5 @@
 ---
-title: "Processing of Raw Sequence of RNA Data for Read Alignment and Quantification"
+title: "RNA-seq Read Alignment and Quantification"
 date: 2021-12-18T08:23:28+08:00
 description: "A tutorial to RNA sequence alignment and quantification."
 tags: ["rna-seq", "salmon", "star", "fastq", "bam", "alignment", "quantification"]
