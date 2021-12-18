@@ -31,14 +31,14 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: ./public
       
-      - name: Push generated doc to Rnssp-rmd-templates
+      - name: Push generated doc to rozblog
         uses: nkoppel/push-files-to-another-repository@v1.1.0
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-files: 'public/*'
           destination-username: 'rosericazondekon'
-          destination-repository: 'blog'
+          destination-repository: 'rozblog'
           destination-directory: 'docs'
           commit-email: 'roseric_2000@yahoo.fr'
           
