@@ -12,7 +12,7 @@ pygmentsStyle = "monokai"
 [params]
   footer = "R. Azondekon"
   description = "Public Health Informatics Specialist, Epidemiologist & Medical Entomologist"
-  avatarURL = "/images/roz.webp"
+  avatarURL = "https://rosericazondekon.github.io/blog/images/roz.webp"
   avatarSize = "size-m"
   customHeadHTML = """
     <!-- KaTeX -->
@@ -61,7 +61,7 @@ pygmentsStyle = "monokai"
   [[menu.main]]
     identifier = "github"
     pre = "<span data-feather='github'></span>"
-    url = "https://github.com/rosericazondekon/rozblog"
+    url = "https://github.com/rosericazondekon/blog"
     weight = 6
 
   [[menu.main]]
