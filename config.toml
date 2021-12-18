@@ -5,12 +5,13 @@ languageCode = "en"
 defaultContentLanguage = "en"
 enableEmoji = true
 enableRobotsTXT = true
+googleAnalytics = G-3TBYJJHRP3
 
 # Choose one of emacs, trac or perldoc
 pygmentsStyle = "monokai"
 
 [params]
-  footer = "R. Azondekon"
+  footer = "Roseric Azondekon"
   description = "Public Health Informatics Specialist, Epidemiologist & Medical Entomologist"
   avatarURL = "https://rosericazondekon.github.io/blog/images/roz.webp"
   avatarSize = "size-m"
@@ -22,10 +23,10 @@ pygmentsStyle = "monokai"
         onload="renderMathInElement(document.body);"></script>
   """
   socialIcons = [
+    {name = "github", url = "https://github.com/rosericazondekon"},
+    {name = "stackoverflow", url = "https://stackoverflow.com/users/9065044/roseric-azondekon"},
     {name = "twitter", url = "https://twitter.com/razondekon"},
     {name = "linkedin", url = "https://www.linkedin.com/in/roseric-azondekon-phd-mph-ms-a8385059"},
-    {name = "stackoverflow", url = "https://stackoverflow.com/users/9065044/roseric-azondekon"},
-    {name = "github", url = "https://github.com/rosericazondekon"},
     #{name = "dribbble", url = "https://example.com"},
     #{name = "instagram", url = "https://example.com"},
     #{name = "twitch", url = "https://example.com"},
