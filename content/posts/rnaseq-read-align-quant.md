@@ -1,7 +1,7 @@
 ---
 title: "RNA-seq Read Alignment and Quantification"
 date: 2021-12-18T08:23:28+08:00
-description: "A tutorial to RNA sequence alignment and quantification."
+description: "A tutorial to RNA sequence read alignment and quantification."
 tags: ["rna-seq", "salmon", "star", "fastq", "bam", "alignment", "quantification"]
 type: post
 weight: 5
