@@ -8,12 +8,14 @@
 # User-specific files
 .Ruserdata
 
+# Temporary Hugo files
+*.lock
+
 # Example code in package build process
 *-Ex.R
 
 # R project file
-.Rproj
-blog.Rproj
+*.Rproj
 
 # public folder
 public/
