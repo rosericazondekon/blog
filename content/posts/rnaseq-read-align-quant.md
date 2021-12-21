@@ -12,7 +12,7 @@ weight: 5
 ## Introduction
 In this tutorial, I show you how to download raw sequence data from the European instance of the SRA, which can be accessed via https://www.ebi.ac.uk/ena. At ENA, the sequencing reads are directly available in FASTQ or SRA formats, which will be explained below.
 
-For this tutorial, we need [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [`multiQC`](https://multiqc.info/), the [`SRA toolkit`](https://sourceforge.net/projects/subread/files/), the [`subread`](https://sourceforge.net/projects/subread/files/subread-1.6.4/) package, a powerful suite of tools designed to interact with SAM and BAM files called [`samtools`](https://sourceforge.net/projects/samtools/files/), [`salmon`](https://combine-lab.github.io/salmon/), and [`STAR`](https://github.com/alexdobin/STAR) installed and referenced in the environment variable `PATH`.
+For this tutorial, we need [`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [`multiQC`](https://multiqc.info/), the [`SRA toolkit`](https://hpc.nih.gov/apps/sratoolkit.html), the [`subread`](https://sourceforge.net/projects/subread/files/) package, a powerful suite of tools designed to interact with SAM and BAM files called [`samtools`](https://sourceforge.net/projects/samtools/files/), [`salmon`](https://combine-lab.github.io/salmon/), and [`STAR`](https://github.com/alexdobin/STAR) installed and referenced in the environment variable `PATH`.
 
 Let's first check if these requirements are met:
 
