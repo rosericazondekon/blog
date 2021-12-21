@@ -27,7 +27,8 @@ pygmentsStyle = "monokai"
     {name = "stackoverflow", url = "https://stackoverflow.com/users/9065044/roseric-azondekon"},
     {name = "twitter", url = "https://twitter.com/razondekon"},
     {name = "linkedin", url = "https://www.linkedin.com/in/roseric-azondekon-phd-mph-ms-a8385059"},
-    #{name = "dribbble", url = "https://example.com"},
+    {name = "researchgate", url = "https://www.researchgate.net/profile/Roseric-Azondekon"},
+    {name = "googlescholar", url = "https://scholar.google.com/citations?user=m45_VT4AAAAJ&hl=en&oi=ao"},
     #{name = "instagram", url = "https://example.com"},
     #{name = "twitch", url = "https://example.com"},
   ]
