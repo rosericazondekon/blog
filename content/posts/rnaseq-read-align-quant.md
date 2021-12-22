@@ -7,7 +7,7 @@ type: post
 weight: 5
 ---
 
-**Disclaimer:** This tutorial was originally written on March 26th, 2019.
+**Disclaimer:** This tutorial was originally written on March 26, 2019.
 
 ## Introduction
 In this tutorial, I show you how to download raw sequence data from the European instance of the SRA, which can be accessed via https://www.ebi.ac.uk/ena. At ENA, the sequencing reads are directly available in FASTQ or SRA formats, which will be explained below.
