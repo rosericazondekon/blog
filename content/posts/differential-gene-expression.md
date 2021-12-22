@@ -4,13 +4,13 @@ date: 2021-12-23T00:30:00+08:00
 description: "A Differential Gene Expression Analysis tutorial Using R."
 tags: ["deseq2", "edger", "limma", "differential", "gene", "expression", "fastq", "read", "count"]
 type: post
-weight: 5
+weight: 10
 ---
 
 **Disclaimer:** This tutorial was originally written on April 01, 2019.
 
 ## Introduction
-In a [previous tutorial](/posts/rnaseq-read-align-quant), we showed you how to download and process RNA-seq FASTQ files for read alignment on a reference sequence, and for read quantification. In this tutorial, we show you how to conduct Differential Gene Expression (DGE) analysis using the [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html), [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html), and [limma](https://bioconductor.org/packages/release/bioc/html/limma.html) package.
+In a [previous tutorial](/posts/rnaseq-read-align-quant), we showed you how to download and process RNA-seq FASTQ files for read alignment on a reference sequence, and for read quantification. In this tutorial, we show you how to conduct Differential Gene Expression (DGE) analysis using the [`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html), [`edgeR`](https://bioconductor.org/packages/release/bioc/html/edgeR.html), and [`limma`](https://bioconductor.org/packages/release/bioc/html/limma.html) packages.
 
 We set our working directory to the `tuto` folder created in our first tutorial.
 
@@ -213,7 +213,7 @@ sizeFactors(dds)
 
 ```r
 # `counts()` allows you to immediately retrieve the normalized read counts
-counts.sf_normalized  <- counts(dds, normalized = TRUE)
+counts.sf_normalized <- counts(dds, normalized = TRUE)
 ```
 
 ```r
@@ -225,7 +225,7 @@ head(counts.sf_normalized)
 ```r
 # Transform size-factor normalized read counts 
 # to log2 scale using a pseudocount of 1
-log.norm.counts  <- log2(counts.sf_normalized + 1)
+log.norm.counts <- log2(counts.sf_normalized + 1)
 ```
 
 Let's see how the log2 transformation compares to the normalized read counts
@@ -242,8 +242,8 @@ boxplot(counts.sf_normalized,
 # Boxplots of log2-transformed read counts
 boxplot(log.norm.counts, 
         notch = TRUE, 
-        main = "log2-transformed  read  counts", 
-        ylab = "log2(read  counts)")
+        main = "log2-transformed read counts", 
+        ylab = "log2(read counts)")
 ```
 
 ### 3.3. Visually exploring normalized read counts
@@ -257,8 +257,8 @@ Checking for heteroskedasticity...
 
 ```r
 msd_plot <- meanSdPlot(log.norm.counts, ranks = FALSE, plot = FALSE)
-msd_plot$gg + ggtitle("sequencing  depth  normalized  log2(read  counts)") + 
-              ylab("standard  deviation")
+msd_plot$gg + ggtitle("sequencing depth normalized log2(read counts)") + 
+              ylab("standard deviation")
 ```
 
 A clear bump on the left-hand side in the figure will indicate that the variance is higher for smaller read counts compared to the variance for greater read counts.
@@ -268,8 +268,8 @@ The amount of heteroskedasticity can be reduced using the dispersion-mean trend 
 
 ```r
 # Obtain regularized log-transformed values
-DESeq.rlog  <- rlog(dds, blind = TRUE)
-rlog.norm.counts  <- assay(DESeq.rlog)
+DESeq.rlog <- rlog(dds, blind = TRUE)
+rlog.norm.counts <- assay(DESeq.rlog)
 head(rlog.norm.counts)
 ```
 
@@ -279,8 +279,8 @@ msd_plot  <- meanSdPlot(rlog.norm.counts,
                         ranks = FALSE,
                         plot = FALSE)
 
-msd_plot$gg + ggtitle("rlog -transformed  read  counts") + 
-              ylab("standard  deviation")
+msd_plot$gg + ggtitle("rlog-transformed read counts") + 
+              ylab("standard deviation")
 ```
 
 Let's re-examine how similar the rlog−transformed read counts are between replicates.
@@ -314,7 +314,7 @@ distance.m_rlog  <- as.dist(1 - cor(rlog.norm.counts, method = "pearson"))
 # plot() can directly interpret the output of hclust()
 plot(hclust(distance.m_rlog), 
      labels = colnames(rlog.norm.counts),
-     main = "rlog transformed read counts\ndistance: Pearson correlation")
+     main = "rlog transformed read counts\n distance: Pearson correlation")
 ```
 
 
@@ -337,7 +337,7 @@ PCA can also be performed using the `DESeq2` which offers a convenient function 
 ```r
 # PCA
 P <- plotPCA(DESeq.rlog)
-# plot  cosmetics
+# plot cosmetics
 P <- P + theme_bw() + ggtitle("Rlog  transformed  counts")
 print(P)
 ```
@@ -381,12 +381,12 @@ dds2 <- DESeq(dds)
 The `results()` function lets you extract the base means across samples, moderated log2 fold changes, standard errors, test statistics etc. for every gene.
 
 ```r
-DGE.results  <- results(dds2, independentFiltering = TRUE, alpha = 0.05)
+DGE.results <- results(dds2, independentFiltering = TRUE, alpha = 0.05)
 summary(DGE.results)
 ```
 
 ```r
-# The DESeqResult object  can  basically  be  handled like a data.frame
+# The DESeqResult object can basically be handled like a data.frame
 head(DGE.results)
 ```
 
@@ -438,7 +438,7 @@ plotMA(DGE.results,
 Another way to provide a general view of the relationship between the expression change between condition is to use a volcano plot:
 
 ```r
-# Volcano plot for a threshold of adjusted pval=0.05 and logFC=7
+# Volcano plot for a threshold of adjusted pval=0.05 and logFC = 7
 with(DGE.results, 
      plot(log2FoldChange, -log10(padj), pch = 20, 
           main = "Volcano plot", xlim = c(-10,10)))
@@ -462,7 +462,7 @@ Heatmaps are a popular means to visualize the expression values across the indiv
 DGE.results.sorted <- DGE.results[order(DGE.results$log2FoldChange), ]
 
 # Identify genes with the desired adjusted p-value cut -off
-# DGEgenes  <- rownames(subset(DGE.results.sorted , padj < 0.05))
+# DGEgenes <- rownames(subset(DGE.results.sorted, padj < 0.05))
 
 # Identify genes with the desired cut -off
 DGEgenes <- rownames(subset(DGE.results.sorted, abs(log2FoldChange) > 7))
@@ -497,7 +497,7 @@ sample_info.edger <- relevel(sample_info.edger, ref = "new_born")
 
 # `DGEList()` is the function that converts the count matrix into an edgeR object.
 # readcounts <- txi$counts # uncomment this line when data from salmon
-edgeR.DGElist <- DGEList(counts = readcounts , group = sample_info.edger)
+edgeR.DGElist <- DGEList(counts = readcounts, group = sample_info.edger)
 keep <- rowSums( cpm(edgeR.DGElist) >= 1) >= 5
 edgeR.DGElist <- edgeR.DGElist[keep, ]
 edgeR.DGElist <- calcNormFactors(edgeR.DGElist, method = "TMM")
@@ -533,18 +533,18 @@ edger_lrt  <- glmLRT(edger_fit)
 
 ```r
 # Extract results from edger_lrt$table
-DGE.results_edgeR  <- topTags(edger_lrt, n = Inf, # to  retrieve  all  genes
+DGE.results_edgeR <- topTags(edger_lrt, n = Inf, # to retrieve all genes
                               sort.by = "PValue", 
                               adjust.method = "BH")
 
-DGE.results_edgeR[1:10,]
+DGE.results_edgeR[1:10, ]
 ```
 
 ```r
 DGE.res_edgeR.sort <- DGE.results_edgeR$table[order(DGE.results_edgeR$table$FDR), ]
 
 # Ientify genes with the desired cut-off
-DGEgenes_edgeR  <- rownames(subset(DGE.res_edgeR.sort, FDR <= 0.05))
+DGEgenes_edgeR <- rownames(subset(DGE.res_edgeR.sort, FDR <= 0.05))
 length(DGEgenes_edgeR)
 ```
 
@@ -555,12 +555,12 @@ fit2 <- glmQLFit(edgeR.DGElist, design)
 
 # Conduct genewise statistical tests for a given coefficient or contrast.
 qlf2 <- glmQLFTest(fit2, coef = 2)
-sm<-topTags(qlf2, n = Inf, # to  retrieve  all  genes
+sm<-topTags(qlf2, n = Inf, # to retrieve all genes
             sort.by = "PValue", 
             adjust.method = "BH")
 
 # explore results table
-sm[1:10,]
+sm[1:10, ]
 ```
 
 ```r
@@ -615,24 +615,24 @@ aheatmap(hm.mat_DGEgenes.edgeR,
 
 ```r
 # `limma` also needs a design matrix, just like edgeR
-design  <- model.matrix(~sample_info.edger)
+design <- model.matrix(~sample_info.edger)
 
 # Transform the count  data to log2-counts -per -million and estimate
 # the mean-variance relationship, which is used to compute weights
 # for each count -- this is supposed to make the read counts
 # amenable to be used with linear models
-design  <- model.matrix(~sample_info.edger)
+design <- model.matrix(~sample_info.edger)
 rownames(design) <- colnames(edgeR.DGElist)
-voomTransformed  <- voom(edgeR.DGElist, design, plot = FALSE)
+voomTransformed <- voom(edgeR.DGElist, design, plot = FALSE)
 ```
 
 ```r
 # Fit a linear model for each gene
-voomed.fitted  <- lmFit(voomTransformed, design = design)
+voomed.fitted <- lmFit(voomTransformed, design = design)
 
 # Compute moderated t-statistics, moderated F-statistics,
 # and log-odds of differential expression
-voomed.fitted  <- eBayes(voomed.fitted)
+voomed.fitted <- eBayes(voomed.fitted)
 ```
 
 ```r
@@ -641,7 +641,7 @@ colnames(design) # check how the coefficient is named
 ```
 
 ```r
-DGE.results_limma  <- topTable(voomed.fitted,
+DGE.results_limma <- topTable(voomed.fitted,
                                coef = "sample_info.edgermiddle_aged",
                                number = Inf, 
                                adjust.method = "BH",
@@ -649,7 +649,7 @@ DGE.results_limma  <- topTable(voomed.fitted,
 ```
 
 ```r
-head(DGE.results_limma[DGE.results_limma$logFC > 3,])
+head(DGE.results_limma[DGE.results_limma$logFC > 3, ])
 ```
 
 ```r
@@ -700,7 +700,7 @@ gplots::venn(DE_list)
 ```r
 # more sophisticated venn alternative, especially if you 
 # are comparing  more than 3 lists
-DE_gns  <- UpSetR::fromList(DE_list)
+DE_gns <- UpSetR::fromList(DE_list)
 UpSetR::upset(DE_gns, order.by = "freq")
 ```
 
