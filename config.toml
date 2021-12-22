@@ -29,7 +29,7 @@ pygmentsStyle = "monokai"
     {name = "linkedin", url = "https://www.linkedin.com/in/roseric-azondekon-phd-mph-ms-a8385059"},
     {name = "researchgate", url = "https://www.researchgate.net/profile/Roseric-Azondekon"},
     {name = "googlescholar", url = "https://scholar.google.com/citations?user=m45_VT4AAAAJ&hl=en&oi=ao"},
-    #{name = "instagram", url = "https://example.com"},
+    {name = "orcid", url = "https://orcid.org/0000-0001-9155-4153"},
     #{name = "twitch", url = "https://example.com"},
   ]
   metaKeywords = ["blog", "rosericazondekon", "gazondekon", "razondekon" "gbedegnon", "roseric", "azondekon"]
