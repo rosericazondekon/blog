@@ -27,7 +27,7 @@
 <section>
     <div>
         <h2 style="text-align: center;">Latest Posts</h2>
-        {{- range ( where site.RegularPages "Section" "posts" | first 3 ) }}
+        {{- range ( where site.RegularPages "Section" "posts" | last 3 ) }}
             <article class="post-title">
                 <a href="{{ .RelPermalink }}" class="post-link">{{ .Title }}</a>
                 <div class="flex-break"></div>

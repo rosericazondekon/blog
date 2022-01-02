@@ -3,6 +3,7 @@ title: Rnssp R Markdown Templates
 type: page
 ---
 
+![](/images/rnssp_logo.png)
 
 The Rnssp R Markdown Templates are extensions to the Rnssp R package. These templates are developed in collaboration with the members of the Community of Practice (CoP) and the National Syndromic Surveillance Program (NSSP).
 

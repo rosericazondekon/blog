@@ -9,4 +9,5 @@ The kdtEstimator is a small Shiny application designed specifically for the esti
 Other scientists interested in the estimation of measures like Lethal Dose 50 (LD50) or Lethal Concentration (LC50) may also use it.
 
 * Release date: May, 2018
+* [Try it live here!](https://razondekon.shinyapps.io/kdtApp/)
 * [Source code](https://github.com/rosericazondekon/kdtEstimator)

@@ -4,7 +4,7 @@ type: page
 ---
 
 
-The Global Vaccination Survey Analyzer (GVSA) is a standardized tool to support the analysis of vaccination survey data among displaced populations. I developed the GVSA as a standalone shiny application for the CDC with the support of UNHCR. 
+The Global Vaccination Survey Analyzer (GVSA) is a standardized tool to support the analysis of vaccination survey data among displaced populations. I developed the GVSA as a standalone shiny application for the CDC with the support of the UNHCR. 
 
 It enables users to easily review vaccination surveys conducted in displaced populations, automatically analyze, visualize vaccination survey results in easy to read dashboards, and generate downloadable reports.
 
