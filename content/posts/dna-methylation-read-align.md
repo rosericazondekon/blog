@@ -88,8 +88,6 @@ mkdir -p sra_files
 
 Since the decommission of the SRA Fuse/FTP site on December 1, 2019, the `prefetch` utility included in the `SRA toolkit` is recommended.
 
-<!-- According to https://www.ncbi.nlm.nih.gov/books/NBK158899/, the FTP root to download files from NCBI is ftp://ftp-trace.ncbi.nih.gov/ and the remainder path follow the specific pattern `/sra/sra-instant/reads/ByRun/sra/{SRR|ERR|DRR}/<first 6 characters of accession>/<accession>/<accession>.sra`.-->
-
 Notice that the accession number for the SRA files are located in the fourth column `run_accession` in all_samples.txt. We proceed to the download of the SRA files of the samples listed in samples.txt with the following code: (**Attention: The download may take a long time!**)
 
 ```shell

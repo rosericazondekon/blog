@@ -340,8 +340,8 @@ mkdir -p read_counts
 ```shell
 # Count features using 10 threads ('-T 10')
 featureCounts -a annotation/gene_annotation.gtf \
-              -o read_counts/featureCounts_results.txt \
-                 alignment_STAR/*bam -T 10
+              -o read_counts/featureCounts_results.txt alignment_STAR/*bam \
+              -T 10
 ```
 
 ### 5.2. Using the salmon pseudoaligner
@@ -377,7 +377,8 @@ Now that we have our index built, we are ready to quantify our samples using the
 # Read quantification using 8 threads (-p 8)
 cut -f5 samples.txt | xargs -i sh -c \
     'run_accession={}; \
-     salmon quant -i salmon_index -l A \
+     salmon quant -i salmon_index \
+                  -l A \
                   -1 fastq/${run_accession}/${run_accession}_1.fastq.gz \
                   -2 fastq/${run_accession}/${run_accession}_2.fastq.gz \
                   -p 8 \
