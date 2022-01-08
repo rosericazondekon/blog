@@ -77,9 +77,9 @@ submitted_ftp,sra_ftp&format=tsv&download=true&limit=0"
 You may try to open the `all_samples.txt` file with LibreOffice or Excel to view it. For this project, we are only interested in the paired-end first 9 RNA-seq samples. Since the first line in `all_samples.txt` contains the header, we will generate another file containing only the first 10 lines of `all_samples.txt` with the following command:
 
 ```shell
-sed '1d' all_samples.txt > all_samples.txt2
-head -9 all_samples.txt2 > samples.txt
-rm all_samples.txt2
+sed '1d' all_samples.txt > all_samples2.txt
+head -9 all_samples2.txt > samples.txt
+rm all_samples2.txt
 ```
 
 Now, let's create a new folder for our SRA files.
@@ -97,8 +97,8 @@ Notice that the accession number for the SRA files are located in the fourth col
 ```shell
 # The command below may take too long to download.
 cut -f4 samples.txt | xargs -i sh -c \
-'run_accession={}; \
-prefetch $run_accession --output-directory sra_files'
+        'run_accession={}; \
+         prefetch $run_accession --output-directory sra_files'
 ```
 
 ## 2. Converting SRA files to FASTQ files
@@ -106,9 +106,12 @@ Now that the download is complete, let's convert the SRA files into FASTQ files 
 
 ```shell
 cut -f4 samples.txt | xargs -i sh -c \
-'run_accession={}; \
-fastq-dump --outdir fastq/${run_accession} --gzip \
---skip-technical --split-3 sra_files/${run_accession}/${run_accession}.sra'
+        'run_accession={}; \
+         fastq-dump \
+                --outdir fastq/${run_accession} \
+                --gzip \
+                --skip-technical \
+                --split-3 sra_files/${run_accession}/${run_accession}.sra'
 ```
 
 This should be the file structure of your working directory up to this point:
@@ -166,9 +169,9 @@ Up to this point, we have all our RNA-seq FASTQ files ready for Quality Control 
 
 ```shell
 cut -f4 samples.txt | xargs -i sh -c 
-'run_accession={}; \
-mkdir -p fastqc_reports/${run_accession}; \
-fastqc fastq/${run_accession}/*fastq.gz -o fastqc_reports/${run_accession}'
+        'run_accession={}; \
+         mkdir -p fastqc_reports/${run_accession}; \
+         fastqc fastq/${run_accession}/*fastq.gz -o fastqc_reports/${run_accession}'
 ```
 
 Next, let's summarize the QC reports (for all the samples) into one unique report using `multiqc`:
@@ -204,20 +207,17 @@ While it is usually faster to align against a cDNA reference sequence (cDNA), in
 ```shell
 # Download the latest human genome
 wget -P reference \
-ftp://ftp.ensembl.org/pub/release-93/fasta/homo_sapiens\
-/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+ftp://ftp.ensembl.org/pub/release-93/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 ```
 
 ```shell
 # Decompress genome sequence file and rename it
-gzip -dk < reference/Homo_sapiens.GRCh38.dna.\
-primary_assembly.fa.gz > reference/human_genome.fa
+gzip -dk < reference/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz > reference/human_genome.fa
 ```
 
 ```shell
 # Download GTF annotation file
-wget -P annotation ftp://ftp.ensembl.org/pub/release-95\
-/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz
+wget -P annotation ftp://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz
 ```
 
 ```shell
@@ -228,7 +228,7 @@ gzip -dk < annotation/Homo_sapiens.GRCh38.95.gtf.gz > annotation/gene_annotation
 ### 4.2. Aligning reads using STAR
 
 #### 4.2.1. Generate genome index
-**This step has to be done only once per genome type (and alignment program)**. The index files will comprise the genome sequence, suffix arrays (i.e., tables of k-mers), chromosome names and lengths, splice junctions coordinates, and information about the genes (e.g. the strand). Therefore, the main input for this step encompasses the reference genome and an annotation file.
+**This step has to be performed only once per genome type (and alignment program)**. The index files will comprise the genome sequence, suffix arrays (i.e., tables of k-mers), chromosome names and lengths, splice junctions coordinates, and information about the genes (e.g. the strand). Therefore, the main input for this step encompasses the reference genome and an annotation file.
 
 **The index creation may take a long time!**
 
@@ -251,7 +251,7 @@ STAR --runThreadN 10 \
 ```
 
 #### 4.2.2. Alignment
-This step has to be done for each individual FASTQ file.
+This step has to be performed for each individual FASTQ file.
 
 **This step may take a long time!**
 
@@ -263,16 +263,16 @@ mkdir -p alignment_STAR
 ```shell
 # execute STAR in the runMode "alignReads"
 cut -f5 samples.txt | xargs -i sh -c \
-'run_accession={}; \
-STAR --genomeDir STARindex \
-     --readFilesIn fastq/${run_accession}/*fastq.gz \
-     --readFilesCommand zcat \
-     --outFileNamePrefix alignment_STAR/${run_accession}\
-     --outFilterMultimapNmax 1 \
-     --outReadsUnmapped Fastx \
-     --outSAMtype BAM SortedByCoordinate \
-     --twopassMode Basic \
-     --runThreadN 10'
+        'run_accession={}; \
+         STAR --genomeDir STARindex \
+              --readFilesIn fastq/${run_accession}/*fastq.gz \
+              --readFilesCommand zcat \
+              --outFileNamePrefix alignment_STAR/${run_accession}\
+              --outFilterMultimapNmax 1 \
+              --outReadsUnmapped Fastx \
+              --outSAMtype BAM SortedByCoordinate \
+              --twopassMode Basic \
+              --runThreadN 10'
 ```
 
 #### 4.2.3. BAM file indexing
@@ -339,8 +339,8 @@ mkdir -p read_counts
 
 ```shell
 # Count features using 10 threads ('-T 10')
-featureCounts -a annotation/gene_annotation.gtf\
-              -o read_counts/featureCounts_results.txt\
+featureCounts -a annotation/gene_annotation.gtf \
+              -o read_counts/featureCounts_results.txt \
                  alignment_STAR/*bam -T 10
 ```
 
@@ -376,11 +376,12 @@ Now that we have our index built, we are ready to quantify our samples using the
 ```shell
 # Read quantification using 8 threads (-p 8)
 cut -f5 samples.txt | xargs -i sh -c \
-'run_accession={}; \
-salmon quant -i salmon_index -l A \
-             -1 fastq/${run_accession}/${run_accession}_1.fastq.gz \
-             -2 fastq/${run_accession}/${run_accession}_2.fastq.gz \
-             -p 8 -o quants/${run_accession}_quant'
+    'run_accession={}; \
+     salmon quant -i salmon_index -l A \
+                  -1 fastq/${run_accession}/${run_accession}_1.fastq.gz \
+                  -2 fastq/${run_accession}/${run_accession}_2.fastq.gz \
+                  -p 8 \
+                  -o quants/${run_accession}_quant'
 ```
 
 The read counts file `featureCounts_results.txt` can be imported in `R` for downstream data analysis. Similarly, we can import transcript-level estimates into `R` from the quantification files generated by `salmon`.
