@@ -1,7 +1,7 @@
 ---
-title: "DNA Methylation Read Sequence Alignment"
+title: "Bisulfite Treated Sequence Read Alignment"
 date: 2022-01-08T13:08:00+08:00
-description: "A tutorial to Bisulfite-seq DNA Methylation read alignment with Bismark Aligner."
+description: "A tutorial to Bisulfite-treated DNA Methylation read alignment"
 tags: ["dna", "methylation", "cpg-islands", "bisulfite-seq", "bam", "sam", "fastq", "alignment"]
 type: post
 weight: 15
