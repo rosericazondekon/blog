@@ -206,18 +206,20 @@ While it is usually faster to align against a cDNA reference sequence (cDNA), in
 
 ```shell
 # Download the latest human genome
-wget -P reference \
-ftp://ftp.ensembl.org/pub/release-93/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+wget -P reference ftp://ftp.ensembl.org/pub/release-93/fasta\
+/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 ```
 
 ```shell
 # Decompress genome sequence file and rename it
-gzip -dk < reference/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz > reference/human_genome.fa
+gzip -dk < reference/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz > \
+reference/human_genome.fa
 ```
 
 ```shell
 # Download GTF annotation file
-wget -P annotation ftp://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz
+wget -P annotation ftp://ftp.ensembl.org/pub/release-95/gtf\
+/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz
 ```
 
 ```shell
@@ -278,9 +280,9 @@ cut -f5 samples.txt | xargs -i sh -c \
 #### 4.2.3. BAM file indexing
 
 
-Most downstream applications like the [Integrative Genomics Viewer (IGV)](https://software.broadinstitute.org/software/igv/) will require a .BAM.BAI file together with every BAM file to quickly access the BAM files without having to load them into memory.
+Most downstream applications like the [Integrative Genomics Viewer (IGV)](https://software.broadinstitute.org/software/igv/) will require a `.BAM.BAI` file together with every BAM file to quickly access the BAM files without having to load them into memory.
 
-To obtain these index, let's now index all the BAM files within the 'alignment_STAR' folder using `samtools`.
+To obtain these `.BAM.BAI` files, let's index all the BAM files within the `alignment_STAR` folder using `samtools`.
 
 ```shell
 for i in alignment_STAR/*; do

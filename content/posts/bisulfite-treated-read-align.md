@@ -172,13 +172,13 @@ This step has to be performed for each individual FASTQ file.
 # execute Bismark aligner
 cut -f4 samples.txt | xargs -i bash -c \
   'run_accession={}; 
-  mkdir -p alignment_Bismark/${run_accession}; \
-  bismark --parallel 8 
-          --gzip \
-          --fastq \
-          --output_dir alignment_Bismark/${run_accession} \
-          --genome ./reference -1 fastq/${run_accession}/${run_accession}_1.fastq.gz \
-                               -2 fastq/${run_accession}/${run_accession}_2.fastq.gz'
+   mkdir -p alignment_Bismark/${run_accession}; \
+   bismark --parallel 8 
+           --gzip \
+           --fastq \
+           --output_dir alignment_Bismark/${run_accession} \
+           --genome ./reference -1 fastq/${run_accession}/${run_accession}_1.fastq.gz \
+                                -2 fastq/${run_accession}/${run_accession}_2.fastq.gz'
 ```
 
 #### 4.2.3. Sorting BAM files and converting to SAM files
@@ -186,7 +186,7 @@ cut -f4 samples.txt | xargs -i bash -c \
 We sort sort the `BAM` files using the `samtools sort` command:
 
 ```shell
-# Sorting the bam files and converting to 
+# Sorting the bam files and converting them to sam files
 for i in alignment_Bismark/*/*; do
     if [ "${i}" != "${i%pe.bam}" ];then
         samtools sort -l 0 \
@@ -223,7 +223,8 @@ cut -f4 samples.txt | xargs -i bash -c \
               --buffer_size 40G \
               --merge_non_CpG \
               --comprehensive \
-              --output bismark_methCalls/${run_accession} alignment_Bismark/${run_accession}/*_pe.bam'
+              --output bismark_methCalls/${run_accession} \
+                       alignment_Bismark/${run_accession}/*_pe.bam'
 ```
 
 In another tutorial, we will analyze DNA methylation data from the generated sorted SAM files from this tutorial using the `MethylKit` Bioconductor package in R.
