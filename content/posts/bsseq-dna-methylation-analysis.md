@@ -2,7 +2,7 @@
 title: "Bisulfite Treated DNA Methylation Analysis"
 date: 2022-01-22T12:56:00+08:00
 description: "A DNA Methylation Analysis tutorial Using R."
-tags: ["bsseq", "dmrseq", "cpg-islands", "dmr", "block", "dna", "methylation", "bisulfite-seq", "fastq"]
+tags: ["bsseq", "dmrseq", "cpg-islands", "dmr", "block", "dna", "methylation", "bisulfite-seq", "fastq"]  
 type: post
 weight: 20
 ---
@@ -38,7 +38,7 @@ repositories <- c("https://cloud.r-project.org",
 packages <- c("bsseq", "bsseqdata", "dmrseq", "DelayedMatrixStats")
 
 # Install and load missing packages
-new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
+new.packages <- packages[!(packages %in% installed.packages()[, "Package"])]
 
 if(length(new.packages)){
     install.packages(new.packages, repos = repositories)
@@ -69,7 +69,7 @@ sampleData
 
 ```r
 methyl_files <- list.files(files_loc, "\\cov.gz$", 
-                           full.names=TRUE, recursive=TRUE)
+                           full.names = TRUE, recursive = TRUE)
 methyl_files
 ```
 
