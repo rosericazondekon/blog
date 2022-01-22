@@ -266,7 +266,7 @@ The “blocks” of hypomethylation are clearly visible in the marginal distribu
 
 ## 4. Finding Differentially Methylated Regions (DMRs)
 
-We use the `dmrseq` function of the `dmrseq` Bioconductor R package to compute the DMRs.
+We use the `dmrseq()` function of the `dmrseq` Bioconductor R package to compute the DMRs.
 
 ```r
 # run the results for a subset of 60,000 CpGs in the interest
