@@ -54,8 +54,8 @@ We read in the methylation calls directly from the `Bismark` methylation extract
 
 ```r
 # Get sample data from files
-files_loc <- file.path(getwd(),'bismark_methCalls')
-samples <- list.dirs(files_loc,full.names = FALSE,recursive = FALSE)
+files_loc <- file.path(getwd(), 'bismark_methCalls')
+samples <- list.dirs(files_loc, full.names = FALSE, recursive = FALSE)
 samples
 ```
 
@@ -133,7 +133,8 @@ The first step of the analysis is to smooth the data
 combined_data.fit <- BSmooth(
     BSseq = combined_data, 
     BPPARAM = MulticoreParam(workers = 7), 
-    verbose = TRUE)
+    verbose = TRUE
+)
 ```
 
 Since the previous step is time consuming and computationally expensive, let's save the smoothed data:
@@ -199,10 +200,13 @@ For t-statistics, we will only keep CpGs where at least 2 cancer samples and at 
 
 ```r
 combined_data.cov <- getCoverage(combined_data.fit)
+
 keep.index2 <- which(rowSums(combined_data.cov[,
                              combined_data$condition == "cancer"] >= 2) >= 2 &
                      rowSums(combined_data.cov[, 
-                             combined_data$condition == "normal"] >= 2) >= 2)
+                             combined_data$condition == "normal"] >= 2) >= 2
+              )
+
 length(keep.index2)
 ```
 
@@ -225,14 +229,14 @@ We now compute t-statistics with the `BSmooth.tstat` function provided by the `B
 
 ```r
 combined_data.tstat <- BSmooth.tstat(
-                          combined_data.fit2,
-                          group1 = grp2,
-                          group2 = grp1, 
-                          estimate.var = "group2",
-                          local.correct = TRUE,
-                          mc.cores = 8,
-                          verbose = TRUE
-                      )
+    combined_data.fit2,
+    group1 = grp2,
+    group2 = grp1,
+    estimate.var = "group2",
+    local.correct = TRUE,
+    mc.cores = 8,
+    verbose = TRUE
+)
 ```
 
 ```r
@@ -265,7 +269,8 @@ The “blocks” of hypomethylation are clearly visible in the marginal distribu
 We use the `dmrseq` function of the `dmrseq` Bioconductor R package to compute the DMRs.
 
 ```r
-# run the results for a subset of 60,000 CpGs in the interest of computation time.
+# run the results for a subset of 60,000 CpGs in the interest
+# of computation time
 # Run with a single core if it fails on multiple cores (workers = 1)
 dmrs <- dmrseq(bs = combined_data.filtered[240001:300000, ],
                cutoff = 0.05,
@@ -325,7 +330,7 @@ In some applications, such as cancer, it is of interest to effectively 'zoom out
 
 ```r
 # Run the results for a subset of 300,000 CpGs in the interest
-# of computation time.
+# of computation time
 # Run with a single core if it fails on multiple cores
 blocks <- dmrseq(bs = combined_data.filtered[120001:420000, ],
                  cutoff = 0.05,
