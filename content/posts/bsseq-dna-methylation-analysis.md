@@ -80,7 +80,7 @@ for(i in 1:length(methyl_files)){
     sampleTable <- data.frame(condition = conditions[i])
     rownames(sampleTable) <- samples[i]
     assign(
-        paste0("methyl_data",i),
+        paste0("methyl_data", i),
         read.bismark(methyl_files[i],
                      loci = NULL,
                      colData = sampleTable,
