@@ -184,7 +184,7 @@ To avoid too many differentially methilated regions (DRMs), we remove CpGs with 
 # which loci and sample indices to keep
 keep.index <- which(
                 DelayedMatrixStats::rowSums2(
-                  getCoverage(combined_data, type="Cov") == 0) == 0
+                  getCoverage(combined_data, type = "Cov") == 0) == 0
               )
 
 sample.index <- which(pData(combined_data)$condition %in% c("normal", "cancer"))
@@ -294,7 +294,7 @@ sum(dmrs$qval < 0.05)
 
 ```r
 # select just the regions below FDR 0.05 and place in a new data.frame
-sigRegions <- dmrs[dmrs$qval < 0.05,]
+sigRegions <- dmrs[dmrs$qval < 0.05, ]
 ```
 
 
@@ -318,9 +318,9 @@ annotation <- getAnnot("hg18")
 ```r
 # Plot DMRs
 plotDMRs(combined_data.filtered,
-         regions=dmrs[1,], 
-         testCovariate="condition",
-         annoTrack=annotation)
+         regions = dmrs[1, ], 
+         testCovariate = "condition",
+         annoTrack = annotation)
 ```
 
 
@@ -352,7 +352,7 @@ We may visualize the top methylation blocks from the block analysis as shown bel
 ```r
 # Plot top methylation blocks 
 plotDMRs(combined_data.filtered, 
-         regions = blocks[1,], 
+         regions = blocks[1, ], 
          testCovariate = "condition",
          annoTrack = annotation)
 ```
