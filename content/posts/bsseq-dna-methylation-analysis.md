@@ -324,7 +324,8 @@ plotDMRs(combined_data.filtered,
 In some applications, such as cancer, it is of interest to effectively 'zoom out' in order to detect larger (lower-resolution) methylation blocks on the order of hundreds of thousands to millions of bases.
 
 ```r
-# run the results for a subset of 300,000 CpGs in the interest of computation time.
+# Run the results for a subset of 300,000 CpGs in the interest
+# of computation time.
 # Run with a single core if it fails on multiple cores
 blocks <- dmrseq(bs = combined_data.filtered[120001:420000, ],
                  cutoff = 0.05,
