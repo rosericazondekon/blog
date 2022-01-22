@@ -47,7 +47,7 @@ if(length(new.packages)){
     install.packages(new.packages, repos = repositories)
 }
 
-lapply(packages, require, character.only = TRUE)
+lapply(packages, library, character.only = TRUE)
 ```
 
 Let's load our samples' information from the `samples.txt` (see [RNA-seq tutorial](/posts/rnaseq-read-align-quant))).
