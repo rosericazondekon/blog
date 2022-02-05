@@ -343,7 +343,7 @@ diffMethPerChr(methyl.diff,
 
 We may annotate the differentially methylated regions/bases based on gene annotation. We therefore need to read the gene annotation from a bed file and annotate the differentially methylated regions with that information. Similar gene annotation can be created using the Bioconductor [`GenomicFeatures`](https://bioconductor.org/packages/release/bioc/html/GenomicFeatures.html) R package.
 
-Let's first download an annotation `.bed` file in the annotation folder created in our first tutorial on DNA methylation. We get ours from [sourceforge.net](https://sourceforge.net/).
+Let's first download an annotation `.bed` file in the annotation folder created in our first tutorial on DNA methylation. We get ours from [sourceforge.net](https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/).
 
 ```r
 # RDownload Annotation bed file
