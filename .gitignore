@@ -49,5 +49,6 @@ vignettes/*.pdf
 
 # MacOS
 .DS_Store
+**/.DS_Store
 */*/.DS_Store
 */*/*/.DS_Store
