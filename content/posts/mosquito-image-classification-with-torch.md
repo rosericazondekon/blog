@@ -58,7 +58,9 @@ for(path in list.files(root_dir, recursive = TRUE, full.names = TRUE)){
     deleted_files <- deleted_files + 1
   }
 }
-cli::cli_alert(paste(deleted_files, "corrupt files have been identified and deleted."))
+cli::cli_alert(
+  paste(deleted_files, "corrupt files have been identified and deleted.")
+)
 ```
 
 
@@ -81,7 +83,10 @@ train_transform <- function(img) {
     (function(x) x$to(device = device)) %>%
     transform_color_jitter() %>%
     transform_random_horizontal_flip() %>%
-    transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
+    transform_normalize(
+      mean = c(0.485, 0.456, 0.406), 
+      std = c(0.229, 0.224, 0.225)
+    )
 }
 ```
 
@@ -92,7 +97,10 @@ test_transform <- valid_transform <- function(img) {
   img %>%
     transform_to_tensor() %>%
     (function(x) x$to(device = device)) %>%
-    transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
+    transform_normalize(
+      mean = c(0.485, 0.456, 0.406), 
+      std = c(0.229, 0.224, 0.225)
+    )
 }
 ```
 
@@ -142,15 +150,21 @@ test_indices <- setdiff(setdiff(1:num_imgs, train_indices), valid_indices)
 
 Now, we use the dataset generator utility to create the training set and the validation set.
 ```r
-train_ds <- mosquitospecies_dataset(root_dir, train_indices, transform = train_transform)
+train_ds <- mosquitospecies_dataset(
+  root_dir, train_indices, transform = train_transform
+)
 train_ds$.length()
 #> [1] 1847
 
-valid_ds <- mosquitospecies_dataset(root_dir, valid_indices, transform = valid_transform)
+valid_ds <- mosquitospecies_dataset(
+  root_dir, valid_indices, transform = valid_transform
+)
 valid_ds$.length()
 #> [1] 528
 
-test_ds <- mosquitospecies_dataset(root_dir, test_indices, transform = test_transform)
+test_ds <- mosquitospecies_dataset(
+  root_dir, test_indices, transform = test_transform
+)
 test_ds$.length()
 #> [1] 265
 ```
@@ -165,7 +179,10 @@ length(valid_ds$classes)
 length(test_ds$classes)
 class_names <- test_ds$classes
 
-cli::cli_alert(paste0(length(class_names), " classes identified. Classes are: ", paste(class_names, collapse = ", "),"."))
+cli::cli_alert(
+  paste0(length(class_names), " classes identified. Classes are: ", 
+         paste(class_names, collapse = ", "),".")
+)
 ```
 
 Good news, our classes are equally represented in the training, validation and training sets.
@@ -223,7 +240,7 @@ images %>%
   iwalk(~{plot(.x); title(.y)})
 ```
 
-![](images/visualize_train_batch_images-1.png)
+![](visualize_train_batch_images-1.png)
 
 
 # Classifying Mosquitoes by Species - the Model
@@ -235,9 +252,13 @@ We also use the cross entropy loss as our loss function, and choose the [Adam op
 ```r
 model <- model_resnet18(pretrained = TRUE)
 
-model$parameters %>% purrr::walk(function(param) param$requires_grad_(FALSE))
+model$parameters %>% 
+  purrr::walk(function(param) param$requires_grad_(FALSE))
 
-model$fc <- nn_linear(in_features = model$fc$in_features, out_features = length(class_names))
+model$fc <- nn_linear(
+  in_features = model$fc$in_features, 
+  out_features = length(class_names)
+)
 
 model <- model$to(device = device)
 
@@ -274,7 +295,11 @@ Let's instantiate the scheduler:
 num_epochs = 10
 
 scheduler <- optimizer %>% 
-  lr_one_cycle(max_lr = 0.05, epochs = num_epochs, steps_per_epoch = train_dl$.length())
+  lr_one_cycle(
+    max_lr = 0.05, 
+    epochs = num_epochs, 
+    steps_per_epoch = train_dl$.length()
+  )
 ```
 
 
@@ -318,7 +343,10 @@ for (epoch in 1:num_epochs) {
     valid_losses <- c(valid_losses, loss)
   })
   
-  cat(sprintf("\nLoss at epoch %d: training: %3f, validation: %3f\n", epoch, mean(train_losses), mean(valid_losses)))
+  cat(
+    sprintf("\nLoss at epoch %d: training: %3f, validation: %3f\n", 
+      epoch, mean(train_losses), mean(valid_losses))
+  )
 }
 #> 
 #> Loss at epoch 1: training: 0.691431, validation: 0.347098
@@ -378,7 +406,7 @@ mean(test_losses)
 
 We therefore calculate the accuracy of our model:
 
-```{r calculate_accuracy}
+```r
 test_accuracy <-  correct/total
 test_accuracy
 #> [1] 0.9509434
@@ -389,20 +417,23 @@ Impressive, our model correctly identifies the correct species 95.1\% of the tim
 # Run inference on new image
 Let's put our newly built model to the task by predicting the species of a mosquito from its image. For this task, we choose a new image and try to predict the mosquito species in the image.
 
-![](images/unknown_mosquito_species.jpg)
+![](unknown_mosquito_species.jpg)
 
-The above picture has a 3000 \times 4000 picture which was not included in the training, testing or even the validation set. We know that the mosquito in the picture belongs to the *Anopheles stephensi* species.
+The above picture has a 3000 by 4000 picture which was not included in the training, testing or even the validation set. We know that the mosquito in the picture belongs to the *Anopheles stephensi* species.
 
 To predict new images, we write the function below which takes an image path, a model, and a class names vector, and output the predicted class name:
 
-```{r predict_class}
+```r
 predict_species <- function(path, dl_model = model, all_classes = class_names){
   img_tensor <- path %>% 
     jpeg::readJPEG() %>% 
     transform_to_tensor() %>%
     (function(x) x$to(device = device)) %>% 
     transform_resize(size = c(256, 256)) %>% 
-    transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
+    transform_normalize(
+      mean = c(0.485, 0.456, 0.406), 
+      std = c(0.229, 0.224, 0.225)
+    )
   
   prediction <- img_tensor$unsqueeze(dim = 1) %>% 
     dl_model() %>% 
@@ -414,7 +445,7 @@ predict_species <- function(path, dl_model = model, all_classes = class_names){
 
 We now use the custom function defined above to predict the species of the mosquito in the picture above:
 
-```{r predict_new_species}
+```r
 predict_species("unknown_mosquito_species.jpg")
 #> [1] "Anopheles Stephensi"
 ```
