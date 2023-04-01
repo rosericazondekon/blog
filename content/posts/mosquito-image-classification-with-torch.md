@@ -66,7 +66,7 @@ cli::cli_alert(
 
 # Data Loading and preprocessing
 
-We check for GPU accelaration and use it whenever available.
+We check for GPU acceleration and use it whenever available.
 ```r
 # Check for GPU accelaration
 device <- if (cuda_is_available()) torch_device("cuda:0") else "cpu"
