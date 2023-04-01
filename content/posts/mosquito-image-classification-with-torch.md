@@ -240,7 +240,7 @@ images %>%
   iwalk(~{plot(.x); title(.y)})
 ```
 
-![](visualize_train_batch_images-1.png)
+![](/images/visualize_train_batch_images-1.png)
 
 
 # Classifying Mosquitoes by Species - the Model
@@ -417,7 +417,7 @@ Impressive, our model correctly identifies the correct species 95.1\% of the tim
 # Run inference on new image
 Let's put our newly built model to the task by predicting the species of a mosquito from its image. For this task, we choose a new image and try to predict the mosquito species in the image.
 
-![](unknown_mosquito_species.jpg)
+![](/images/unknown_mosquito_species.jpg)
 
 The above picture has a 3000 by 4000 picture which was not included in the training, testing or even the validation set. We know that the mosquito in the picture belongs to the *Anopheles stephensi* species.
 
