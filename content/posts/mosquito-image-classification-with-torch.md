@@ -17,7 +17,7 @@ By the end of this tutorial, you should be able to:
 - draw inference on a new image (predict a mosquito specie from an image)
 
 
-This tutorial is inspired by this [Classifying images with torch](https://blogs.rstudio.com/ai/posts/2020-10-19-torch-image-classification/) tutorial by Sigrid Keydana.
+This tutorial is inspired by the [Classifying images with torch](https://blogs.rstudio.com/ai/posts/2020-10-19-torch-image-classification/) tutorial by Sigrid Keydana.
 
 
 We first load the `tidyverse` package, then load the `torch`, `torchvision`, and `luz` packages which are all part of the [`mlverse`](https://github.com/mlverse), a collection of open source libraries to scale Data Science.
