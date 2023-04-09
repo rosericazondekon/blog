@@ -2,7 +2,7 @@
 title: "Mosquito Species Image Classification using the torch R package"
 date: 2023-04-01T01:48:00+08:00
 description: "An attempt to build a deep learning model to classify mosquito species."
-tags: ["deep learning", "neural network", "mosquito", "vector", "species", "vector-borne", "diseases", "identification", "artificial intelligence"]
+tags: ["torch", "deep learning", "neural network", "mosquito", "vector", "species", "vector-borne", "diseases", "identification", "artificial intelligence"]
 type: post
 weight: 30
 ---
