@@ -16,6 +16,10 @@ By the end of this tutorial, you should be able to:
 - evaluate a deep learning model and
 - draw inference on a new image (predict a mosquito specie from an image)
 
+
+This tutorial is inspired by the [Classifying images with torch](https://blogs.rstudio.com/ai/posts/2020-10-19-torch-image-classification/) tutorial by Sigrid Keydana.
+
+
 We first load the `tidyverse` package, then load the `torch`, `torchvision`, and `luz` packages which are all part of the [`mlverse`](https://github.com/mlverse), a collection of open source libraries to scale Data Science.
 
 All packages are published on the Comprehensive R Archive Network (CRAN) and can therefore be installed with the `install.packages()` function provided by base R.
@@ -58,13 +62,15 @@ for(path in list.files(root_dir, recursive = TRUE, full.names = TRUE)){
     deleted_files <- deleted_files + 1
   }
 }
-cli::cli_alert(paste(deleted_files, "corrupt files have been identified and deleted."))
+cli::cli_alert(
+  paste(deleted_files, "corrupt files have been identified and deleted.")
+)
 ```
 
 
 # Data Loading and preprocessing
 
-We check for GPU accelaration and use it whenever available.
+We check for GPU acceleration and use it whenever available.
 ```r
 # Check for GPU accelaration
 device <- if (cuda_is_available()) torch_device("cuda:0") else "cpu"
@@ -81,7 +87,10 @@ train_transform <- function(img) {
     (function(x) x$to(device = device)) %>%
     transform_color_jitter() %>%
     transform_random_horizontal_flip() %>%
-    transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
+    transform_normalize(
+      mean = c(0.485, 0.456, 0.406), 
+      std = c(0.229, 0.224, 0.225)
+    )
 }
 ```
 
@@ -92,7 +101,10 @@ test_transform <- valid_transform <- function(img) {
   img %>%
     transform_to_tensor() %>%
     (function(x) x$to(device = device)) %>%
-    transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
+    transform_normalize(
+      mean = c(0.485, 0.456, 0.406), 
+      std = c(0.229, 0.224, 0.225)
+    )
 }
 ```
 
@@ -318,7 +330,10 @@ for (epoch in 1:num_epochs) {
     valid_losses <- c(valid_losses, loss)
   })
   
-  cat(sprintf("\nLoss at epoch %d: training: %3f, validation: %3f\n", epoch, mean(train_losses), mean(valid_losses)))
+  cat(
+    sprintf("\nLoss at epoch %d: training: %3f, validation: %3f\n", 
+      epoch, mean(train_losses), mean(valid_losses))
+  )
 }
 #> 
 #> Loss at epoch 1: training: 0.691431, validation: 0.347098
@@ -391,7 +406,7 @@ Let's put our newly built model to the task by predicting the species of a mosqu
 
 ![](images/unknown_mosquito_species.jpg)
 
-The above picture has a 3000 \times 4000 picture which was not included in the training, testing or even the validation set. We know that the mosquito in the picture belongs to the *Anopheles stephensi* species.
+The above picture has a 3000 by 4000 picture which was not included in the training, testing or even the validation set. We know that the mosquito in the picture belongs to the *Anopheles stephensi* species.
 
 To predict new images, we write the function below which takes an image path, a model, and a class names vector, and output the predicted class name:
 
@@ -402,7 +417,10 @@ predict_species <- function(path, dl_model = model, all_classes = class_names){
     transform_to_tensor() %>%
     (function(x) x$to(device = device)) %>% 
     transform_resize(size = c(256, 256)) %>% 
-    transform_normalize(mean = c(0.485, 0.456, 0.406), std = c(0.229, 0.224, 0.225))
+    transform_normalize(
+      mean = c(0.485, 0.456, 0.406), 
+      std = c(0.229, 0.224, 0.225)
+    )
   
   prediction <- img_tensor$unsqueeze(dim = 1) %>% 
     dl_model() %>% 
@@ -414,7 +432,7 @@ predict_species <- function(path, dl_model = model, all_classes = class_names){
 
 We now use the custom function defined above to predict the species of the mosquito in the picture above:
 
-```{r predict_new_species}
+```r
 predict_species("unknown_mosquito_species.jpg")
 #> [1] "Anopheles Stephensi"
 ```
