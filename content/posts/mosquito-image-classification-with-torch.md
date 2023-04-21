@@ -393,7 +393,7 @@ mean(test_losses)
 
 We therefore calculate the accuracy of our model:
 
-```{r calculate_accuracy}
+```r
 test_accuracy <-  correct/total
 test_accuracy
 #> [1] 0.9509434
@@ -410,7 +410,7 @@ The above picture has a 3000 by 4000 picture which was not included in the train
 
 To predict new images, we write the function below which takes an image path, a model, and a class names vector, and output the predicted class name:
 
-```{r predict_class}
+```r
 predict_species <- function(path, dl_model = model, all_classes = class_names){
   img_tensor <- path %>% 
     jpeg::readJPEG() %>% 
