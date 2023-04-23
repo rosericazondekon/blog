@@ -15,6 +15,7 @@ By the end of this tutorial, you should be able to:
 - fit an Artificial Neural Network model to your data
 - evaluate a deep learning model and
 - draw inference on a new image (predict a mosquito specie from an image)
+- deploy the image classification model as a shiny app
 
 
 This tutorial is inspired by the [Classifying images with torch](https://blogs.rstudio.com/ai/posts/2020-10-19-torch-image-classification/) tutorial by Sigrid Keydana.
@@ -30,6 +31,10 @@ library(torch)
 library(torchvision)
 library(luz)
 ```
+
+
+We use the `shiny` R package for model deployment (run `install.packages("shiny")` from your R console to install `shiny`).
+
 
 Let's set a seed for R and `torch` for reproducible results:
 ```r
@@ -438,6 +443,20 @@ predict_species("unknown_mosquito_species.jpg")
 ```
 
 Our model accurately predicts that the species of the mosquito in the picture above is *Anopheles stephensi*.
+
+Let's save our model for a future deployment:
+
+```r
+torch_save(model, "mosquito_class_model.rt")
+```
+
+
+# Deployment
+We deploy the image classification model built in this tutorial as [a small shiny app](https://github.com/rosericazondekon/mosquitoImageClassification). You may run it from an R console with the following R script:
+
+```r
+shiny::runGitHub("mosquitoImageClassification", "rosericazondekon")
+```
 
 
 # Conclusion
