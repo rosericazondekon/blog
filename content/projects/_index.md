@@ -6,18 +6,20 @@ type: page
 
 ### Hello, here are my current and past projects
 
-1. [The Rnssp R package](/projects/rnssp)
+1. [The Rnssp R package](/projects/pynssp)
 
-2. [Rnssp R Markdown Templates](/projects/rnssp_rmd_templates)
+2. [The Rnssp R package](/projects/rnssp)
 
-3. [The Rnssp R Markdown Templates Online Documentation](/projects/rnssp_rmd_doc)
+3. [Rnssp R Markdown Templates](/projects/rnssp_rmd_templates)
 
-4. [The Global Vaccination Survey Analyzer (GVSA)](/projects/gvsa)
+4. [The Rnssp R Markdown Templates Online Documentation](/projects/rnssp_rmd_doc)
 
-5. [The Integrated RNA-seq Analysis Application (IRNAA)](/projects/irnaa)
+5. [The Global Vaccination Survey Analyzer (GVSA)](/projects/gvsa)
 
-6. [VirusSeqPipeline: A VirusSeq pipeline for processing multiple RNAseq samples](/projects/virusseqpipeline)
+6. [The Integrated RNA-seq Analysis Application (IRNAA)](/projects/irnaa)
 
-7. [kdtEstimator: a Shiny application for Knock-Down Time estimation based on aggregated WHO or CDC bottle Bioassay data](/projects/kdtestimator)
+7. [VirusSeqPipeline: A VirusSeq pipeline for processing multiple RNAseq samples](/projects/virusseqpipeline)
 
-8. [AuthorVis: A co-authorship network exploration, and link prediction tool](/projects/auhorvis)
+8. [kdtEstimator: a Shiny application for Knock-Down Time estimation based on aggregated WHO or CDC bottle Bioassay data](/projects/kdtestimator)
+
+9. [AuthorVis: A co-authorship network exploration, and link prediction tool](/projects/auhorvis)
