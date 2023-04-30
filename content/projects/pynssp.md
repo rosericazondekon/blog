@@ -1,5 +1,5 @@
 ---
-title: The `pynssp` Python package
+title: The pynssp Python package
 type: page
 ---
 
