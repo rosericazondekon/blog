@@ -6,7 +6,7 @@ type: page
 
 ### Hello, here are my current and past projects
 
-1. [The Rnssp R package](/projects/pynssp)
+1. [The pynssp Python package](/projects/pynssp)
 
 2. [The Rnssp R package](/projects/rnssp)
 
