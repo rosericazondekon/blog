@@ -10,6 +10,6 @@ The NSSP is a collaboration among CDC programs, federal partners, and local and 
 
 The `pynssp` Python package continues this effort by improving analytic reusability, reproducibility for Python data scientists and analysts to robustly support technical capacity building within the CoP.
 
-* Release date: June, 2021
+* Release date: TBD
 * [Online Documentation](https://cdcgov.github.io/pynssp)
 * [Package source code](https://github.com/CDCgov/pynssp)
