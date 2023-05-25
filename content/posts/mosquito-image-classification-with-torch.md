@@ -13,8 +13,8 @@ By the end of this tutorial, you should be able to:
 - load and preprocess your own images into `torch` tensors
 - import a prebuilt Artificial Neural Network architecture
 - fit an Artificial Neural Network model to your data
-- evaluate a deep learning model and
-- draw inference on a new image (predict a mosquito specie from an image)
+- evaluate a deep learning model
+- draw inference on a new image (predict a mosquito specie from an image) and
 - deploy the image classification model as a shiny app
 
 
