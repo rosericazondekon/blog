@@ -3,7 +3,7 @@ title: Rnssp Shiny Apps
 type: page
 ---
 
-<img src="/images/rnssp_shiny_apps_logo.png" alt="Rnssp R Markdown Templates" height="120")
+![](/images/rnssp_shiny_apps_logo.png)
 
 Rnssp Shiny Apps are custom-built applications with seamless integration to the Rnssp R package.
 
