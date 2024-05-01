@@ -3,7 +3,7 @@ title: Rnssp R Markdown Templates
 type: page
 ---
 
-<img src="/images/rnssp_rmd_templates_logo.png" alt="Rnssp R Markdown Templates" height="120")
+![](/images/rnssp_rmd_templates_logo.png)
 
 The Rnssp R Markdown Templates are extensions to the Rnssp R package. Rnssp R Markdown templates are custom-built, parameterized R Markdown templates with seamless integration to the Rnssp R package to enhance user experiences and streamline workflows.
 
