@@ -3,7 +3,7 @@ title: Rnssp Shiny Apps
 type: page
 ---
 
-{{< figure src="/images/rnssp_shiny_apps_logo.png" title="Rnssp Shiny Apps" width="200px" >}}
+{{< figure src="/images/rnssp_shiny_apps_logo.png" alt="Rnssp Shiny Apps" width="200px" >}}
 
 Rnssp Shiny Apps are custom-built applications with seamless integration to the Rnssp R package.
 
